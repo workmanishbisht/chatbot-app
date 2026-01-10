@@ -262,6 +262,7 @@ input:-webkit-autofill:active {
   border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
+  border-radius: 10px;
   text-align: center;
   z-index: 9999;
   opacity: 0;
@@ -298,9 +299,15 @@ input:-webkit-autofill:active {
 .social svg {
   width: 18px;
   height: 18px;
+  font-size: 15px;
+  font-weight: 500;
   display: block;
   flex-shrink: 0;
 }
+
+
+
+
 
 @media screen and (min-width: 1440px) {
   .login-card {
