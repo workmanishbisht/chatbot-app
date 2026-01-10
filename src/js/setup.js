@@ -71,17 +71,21 @@ window.addEventListener("DOMContentLoaded", () => {
     allowSave = false;
     const state = JSON.parse(raw);
 
-    document.querySelectorAll(".option-grid .option").forEach((el) => {
-      el.classList.toggle("active", el.dataset.value === state.usage);
-    });
+    document
+      .querySelectorAll(".option-grid .option")
+      .forEach((el) =>
+        el.classList.toggle("active", el.dataset.value === state.usage)
+      );
 
-    document.querySelectorAll(".role-grid .role").forEach((el) => {
-      el.classList.toggle("active", el.dataset.value === state.role);
-    });
+    document
+      .querySelectorAll(".role-grid .role")
+      .forEach((el) =>
+        el.classList.toggle("active", el.dataset.value === state.role)
+      );
 
-    document.querySelectorAll(".toggle-row .toggle").forEach((el, i) => {
-      el.classList.toggle("active", !!state.toggles?.[i]);
-    });
+    document
+      .querySelectorAll(".toggle-row .toggle")
+      .forEach((el, i) => el.classList.toggle("active", !!state.toggles?.[i]));
 
     profileImg.src = state.photo || DEFAULT_AVATAR;
     allowSave = true;
@@ -160,7 +164,9 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     const snap = await getDoc(doc(db, "users", user.uid));
-    if (snap.exists() && snap.data().setupCompleted) {
+
+    // block home until setup is completed
+    if (snap.exists() && snap.data().setupCompleted === true) {
       location.replace("../pages/Home.html");
       return;
     }
@@ -173,6 +179,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const user = auth.currentUser;
     if (!user || finishBtn.disabled) return;
 
+    // redirect within 500ms (no waiting for firestore)
     setTimeout(() => {
       location.replace("../pages/Home.html");
     }, 300);

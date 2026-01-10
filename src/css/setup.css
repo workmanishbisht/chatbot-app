@@ -317,14 +317,8 @@ body {
 .footer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin-top: var(--spacing-xl);
-}
-
-.footer a {
-  font-size: 13px;
-  color: var(--accent-primary);
-  text-decoration: none;
 }
 
 .finish-btn {
