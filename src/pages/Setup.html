@@ -1,148 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <title>Nova | Setup</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+<link rel="icon" type="image/png" href="/src/Assets/FavIcon/favicon.png">
     <!-- Fonts -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Poppins:wght@400;500;600&display=swap"
-        rel="stylesheet" />
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <!-- remixicon cdn -->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
     <!-- toastify cdn -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
     <!-- main file -->
     <link rel="stylesheet" href="../css/setup.css" />
-</head>
+  </head>
 
-<body>
-
+  <body>
     <!-- setup screen start -->
     <div class="setup-card">
-        <!-- Progress Header -->
-        <div class="progress-text">SETUP PROGRESS</div>
-        <div class="progress-bar">
-            <span></span>
-        </div>
+      <!-- Progress Header -->
+      <div class="progress-text">SETUP PROGRESS</div>
+      <div class="progress-bar">
+        <span></span>
+      </div>
 
-        <!-- Profile -->
-<div class="profile">
-    <div class="profile-img-container">
-        <img src="https://i.pravatar.cc/300" alt="User" id="profilePreview">
-        <div class="profile-overlay">
-            <button type="button" class="remove-btn" title="Remove profile picture">
-                <i class="ri-delete-bin-6-line"></i>
+      <!-- Profile -->
+      <div class="profile">
+        <div class="profile-img-container">
+          <img src="https://i.pravatar.cc/300" alt="User" id="profilePreview" />
+          <div class="profile-overlay">
+            <button
+              type="button"
+              class="remove-btn"
+              title="Remove profile picture"
+            >
+              <i class="ri-delete-bin-6-line"></i>
             </button>
-        </div>
-    </div>
-
-    <div class="change-text">Change your profile picture</div>
-    <h2>Personalize your experience</h2>
-    <p>
-        Customize your workspace to better suit your
-        professional needs and preferences.
-    </p>
-</div>
-
-        <!-- Usage Cards -->
-        <div class="section">
-            <h4>
-                <i class="ri-magic-line"></i>
-                How do you plan to use the platform?
-            </h4>
-
-            <div class="option-grid">
-
-                <div class="option">
-                    <i class="ri-briefcase-4-line"></i>
-                    <span>Work</span>
-                    <small>Professional teams and projects.</small>
-                </div>
-
-                <div class="option active">
-                    <i class="ri-user-3-line"></i>
-                    <span>Personal</span>
-                    <small>Side projects and solo work.</small>
-                </div>
-
-                <div class="option">
-                    <i class="ri-team-line"></i>
-                    <span>Team</span>
-                    <small>Small groups and startups.</small>
-                </div>
-
-            </div>
+          </div>
         </div>
 
-        <!-- Role Buttons -->
-        <div class="section">
-            <h4>
-                <i class="ri-id-card-line"></i>
-                What is your primary role?
-            </h4>
+        <div class="change-text">Change your profile picture</div>
+        <h2>Personalize your experience</h2>
+        <p>
+          Customize your workspace to better suit your professional needs and
+          preferences.
+        </p>
+      </div>
 
-            <div class="role-grid">
+      <!-- Usage Cards -->
+      <div class="section">
+        <h4>
+          <i class="ri-magic-line"></i>
+          How do you plan to use the platform?
+        </h4>
 
-                <div class="role">
-                    <i class="ri-palette-line"></i>
-                    <div>Designer</div>
-                </div>
+        <div class="option-grid">
+          <div class="option">
+            <i class="ri-briefcase-4-line"></i>
+            <span>Work</span>
+            <small>Professional teams and projects.</small>
+          </div>
 
-                <div class="role active">
-                    <i class="ri-code-line"></i>
-                    <div>Developer</div>
-                </div>
+          <div class="option active">
+            <i class="ri-user-3-line"></i>
+            <span>Personal</span>
+            <small>Side projects and solo work.</small>
+          </div>
 
-                <div class="role">
-                    <i class="ri-bar-chart-line"></i>
-                    <div>Analyst</div>
-                </div>
+          <div class="option">
+            <i class="ri-team-line"></i>
+            <span>Team</span>
+            <small>Small groups and startups.</small>
+          </div>
+        </div>
+      </div>
 
-                <div class="role">
-                    <i class="ri-briefcase-line"></i>
-                    <div>Manager</div>
-                </div>
+      <!-- Role Buttons -->
+      <div class="section">
+        <h4>
+          <i class="ri-id-card-line"></i>
+          What is your primary role?
+        </h4>
 
-            </div>
+        <div class="role-grid">
+          <div class="role">
+            <i class="ri-palette-line"></i>
+            <div>Designer</div>
+          </div>
+
+          <div class="role active">
+            <i class="ri-code-line"></i>
+            <div>Developer</div>
+          </div>
+
+          <div class="role">
+            <i class="ri-bar-chart-line"></i>
+            <div>Analyst</div>
+          </div>
+
+          <div class="role">
+            <i class="ri-briefcase-line"></i>
+            <div>Manager</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notifications -->
+      <div class="section">
+        <h4>
+          <i class="ri-notification-3-line"></i>
+          Stay updated
+        </h4>
+
+        <div class="toggle-row">
+          <span>
+            <i class="ri-mail-line"></i>
+            Email notifications
+          </span>
+          <div class="toggle"></div>
         </div>
 
-        <!-- Notifications -->
-        <div class="section">
-            <h4>
-                <i class="ri-notification-3-line"></i>
-                Stay updated
-            </h4>
-
-            <div class="toggle-row">
-                <span>
-                    <i class="ri-mail-line"></i>
-                    Email notifications
-                </span>
-                <div class="toggle"></div>
-            </div>
-
-            <div class="toggle-row">
-                <span>
-                    <i class="ri-global-line"></i>
-                    Browser push notifications
-                </span>
-                <div class="toggle" style="background: #223844;"></div>
-            </div>
+        <div class="toggle-row">
+          <span>
+            <i class="ri-global-line"></i>
+            Browser push notifications
+          </span>
+          <div class="toggle" style="background: #223844"></div>
         </div>
+      </div>
 
-        <!-- Footer -->
-        <div class="footer">
-            <a href="#">Skip for now</a>
-          <button class="finish-btn" type="button">Finish Setup</button>
-        </div>
+      <!-- Footer -->
+      <div class="footer">
+        <a href="#">Skip for now</a>
+        <button class="finish-btn" type="button">Finish Setup</button>
+      </div>
     </div>
 
     <!-- script link -->
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script type="module" src="../js/setup.js"></script>
-</body>
-
+  </body>
 </html>
