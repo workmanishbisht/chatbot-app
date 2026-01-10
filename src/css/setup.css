@@ -1,0 +1,355 @@
+:root {
+    --bg-primary: #0f2027;
+    --bg-secondary: #0b1a1f;
+    --bg-card: linear-gradient(180deg, #162a33, #0f1f26);
+    --bg-input: #0b1a1f;
+    --bg-social: #0b1a1f;
+    --bg-social-hover: #132b35;
+
+    --text-primary: #ffffff;
+    --text-secondary: #9aa4ad;
+    --text-muted: #7f8b94;
+    --text-label: #bfc7cc;
+    --text-icon: #6c7a86;
+
+    --accent-primary: #1da1f2;
+    --accent-hover: #0e679e;
+    --border-social: #1f3a45;
+
+    --spacing-xs: 8px;
+    --spacing-sm: 12px;
+    --spacing-md: 16px;
+    --spacing-lg: 20px;
+    --spacing-xl: 24px;
+    --spacing-2xl: 30px;
+    --spacing-3xl: 40px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    min-height: 100vh;
+    background: radial-gradient(circle at top, var(--bg-primary), var(--bg-secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+}
+
+.setup-card {
+    width: 100%;
+    max-width: 580px;
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: var(--spacing-xl);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, .55);
+}
+
+.progress-text {
+    font-size: 12px;
+    letter-spacing: .5px;
+    color: var(--accent-primary);
+}
+
+.progress-bar {
+    height: 6px;
+    background: var(--bg-input);
+    border-radius: 10px;
+    margin-top: var(--spacing-xs);
+    overflow: hidden;
+}
+
+.progress-bar span {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: var(--accent-primary);
+    transition: width 0.4s ease;
+}
+
+.profile {
+    text-align: center;
+    margin: var(--spacing-2xl) 0;
+    cursor: pointer;
+    position: relative;
+}
+
+.profile-img-container {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(29, 161, 242, 0.3);
+    transition: border 0.3s;
+}
+
+.profile-img-container:hover {
+    border-color: var(--accent-primary);
+}
+
+.profile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile .change-text {
+    font-size: 13px;
+    color: var(--accent-primary);
+    margin-top: 12px;
+    transition: opacity 0.3s;
+}
+
+.profile:hover .change-text {
+    opacity: 1;
+}
+
+.profile .change-text:hover {
+    text-decoration: underline;
+}
+
+.profile h2 {
+    font-size: 20px;
+    margin-top: var(--spacing-sm);
+}
+
+.profile p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: var(--spacing-xs);
+}
+
+.section {
+    margin-top: var(--spacing-xl);
+}
+
+.section h4 {
+    font-size: 14px;
+    color: var(--text-label);
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.option-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+}
+
+.option {
+    background: var(--bg-social);
+    border: 1px solid var(--border-social);
+    border-radius: 14px;
+    padding: var(--spacing-lg);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.option i {
+    font-size: 20px;
+    color: var(--accent-primary);
+}
+
+.option span {
+    display: block;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+.option small {
+    display: block;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.option.active {
+    background: var(--bg-social-hover);
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 12px rgba(29, 161, 242, 0.3);
+}
+
+.role-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+}
+
+.role {
+    background: var(--bg-social);
+    border: 1px solid var(--border-social);
+    border-radius: 12px;
+    padding: 12px 8px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s;
+}
+
+.role i {
+    font-size: 18px;
+    margin-bottom: 6px;
+    color: var(--text-icon);
+}
+
+.role.active {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: #fff;
+}
+
+.role.active i {
+    color: #fff;
+}
+
+.toggle-row {
+    background: var(--bg-input);
+    border-radius: 14px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-sm);
+}
+
+.toggle-row span {
+    font-size: 13px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.toggle {
+    width: 44px;
+    height: 24px;
+    background: #223844;
+    border-radius: 20px;
+    position: relative;
+    transition: background 0.3s;
+    cursor: pointer;
+}
+
+.toggle::after {
+    content: "";
+    width: 18px;
+    height: 18px;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    transition: transform 0.3s;
+}
+
+.toggle.active {
+    background: #1da1f2 !important;
+}
+
+.toggle.active::after {
+    transform: translateX(20px);
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--spacing-xl);
+}
+
+.footer a {
+    font-size: 13px;
+    color: var(--accent-primary);
+    text-decoration: none;
+}
+
+.finish-btn {
+    background: var(--accent-primary);
+    border: none;
+    padding: 12px 26px;
+    border-radius: 6px;
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.finish-btn:hover {
+    background: var(--accent-hover);
+}
+
+@media (max-width: 768px) {
+    .option-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .role-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .setup-card {
+        padding: var(--spacing-lg);
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: var(--spacing-sm);
+    }
+
+    .setup-card {
+        padding: var(--spacing-md);
+        border-radius: 16px;
+    }
+
+    .profile-img-container {
+        width: 80px;
+        height: 80px;
+    }
+
+    .profile h2 {
+        font-size: 18px;
+    }
+
+    .profile p {
+        font-size: 12px;
+    }
+
+    .option-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .role-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-md);
+    }
+
+    .footer {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        text-align: center;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 360px) {
+    .role-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .toggle-row span {
+        font-size: 12px;
+    }
+}
