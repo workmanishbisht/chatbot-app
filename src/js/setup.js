@@ -41,7 +41,7 @@ function fileToBase64(file) {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
+    reader.onerror = reject;
   });
 }
 
@@ -51,10 +51,6 @@ window.addEventListener("DOMContentLoaded", () => {
   const changeText = document.querySelector(".profile .change-text");
   const finishBtn = document.querySelector(".finish-btn");
   const bar = document.querySelector(".progress-bar span");
-
-  document
-    .querySelectorAll(".option.active,.role.active,.toggle.active")
-    .forEach((e) => e.classList.remove("active"));
 
   bar.style.width = "0%";
   finishBtn.disabled = true;
@@ -87,56 +83,41 @@ window.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    try {
-      const base64 = await fileToBase64(file);
-      const key = `profilePhoto_${user.uid}`;
-      localStorage.setItem(key, base64);
-
-      profileImg.src = base64;
-      showToast("Profile picture updated!", true);
-      updateProgress();
-    } catch (err) {
-      console.error(err);
-      showToast("Failed to process image", false);
-    }
-
+    const base64 = await fileToBase64(file);
+    localStorage.setItem(`profilePhoto_${user.uid}`, base64);
+    profileImg.src = base64;
+    updateProgress();
+    showToast("Profile picture updated");
     fileInput.value = "";
   });
 
-  removeBtn.addEventListener("click", () => {
+  removeBtn.onclick = () => {
     const user = auth.currentUser;
     if (!user) return;
-
-    const key = `profilePhoto_${user.uid}`;
-    localStorage.removeItem(key);
-
+    localStorage.removeItem(`profilePhoto_${user.uid}`);
     profileImg.src = DEFAULT_AVATAR;
-    showToast("Profile picture removed", true);
     updateProgress();
-  });
+    showToast("Profile picture removed");
+  };
 
-  const unsubscribe = onAuthStateChanged(auth, async (user) => {
-    unsubscribe();
-
+  onAuthStateChanged(auth, async (user) => {
     if (!user) {
       window.location.replace("../index.html");
       return;
     }
 
-    const snap = await getDoc(doc(db, "users", user.uid));
-
-    if (snap.exists() && snap.data().setupCompleted) {
-      window.location.replace("../pages/Home.html");
-      return;
-    }
-
     const key = `profilePhoto_${user.uid}`;
     const savedPhoto = localStorage.getItem(key);
-
     profileImg.src =
       savedPhoto && savedPhoto.startsWith("data:image")
         ? savedPhoto
         : DEFAULT_AVATAR;
+
+    const snap = await getDoc(doc(db, "users", user.uid));
+    if (snap.exists() && snap.data().setupCompleted) {
+      window.location.replace("../pages/Home.html");
+      return;
+    }
 
     updateProgress();
   });
@@ -146,23 +127,22 @@ window.addEventListener("DOMContentLoaded", () => {
     const role = document.querySelector(".role-grid .role.active");
     const toggles = document.querySelectorAll(".toggle-row .toggle.active");
     const hasPhoto =
+      profileImg.src &&
       profileImg.src !== DEFAULT_AVATAR &&
       profileImg.src.startsWith("data:image");
 
     const done =
       (usage ? 1 : 0) + (role ? 1 : 0) + toggles.length + (hasPhoto ? 1 : 0);
-    const percent = (done / 5) * 100;
 
-    bar.style.width = `${percent}%`;
+    const percent = (done / 5) * 100;
+    bar.style.width = percent + "%";
     finishBtn.disabled = percent !== 100;
     finishBtn.style.opacity = percent === 100 ? "1" : "0.5";
   }
 
   document.querySelectorAll(".option-grid .option").forEach((el) => {
     el.onclick = () => {
-      document
-        .querySelectorAll(".option-grid .option")
-        .forEach((o) => o.classList.remove("active"));
+      document.querySelectorAll(".option-grid .option").forEach(o => o.classList.remove("active"));
       el.classList.add("active");
       updateProgress();
     };
@@ -170,9 +150,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll(".role-grid .role").forEach((el) => {
     el.onclick = () => {
-      document
-        .querySelectorAll(".role-grid .role")
-        .forEach((r) => r.classList.remove("active"));
+      document.querySelectorAll(".role-grid .role").forEach(r => r.classList.remove("active"));
       el.classList.add("active");
       updateProgress();
     };
@@ -185,7 +163,7 @@ window.addEventListener("DOMContentLoaded", () => {
     };
   });
 
-  finishBtn.onclick = () => {
+  finishBtn.onclick = async () => {
     if (finishBtn.disabled) return;
 
     const user = auth.currentUser;
@@ -193,9 +171,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const roleEl = document.querySelector(".role-grid .role.active");
     const toggles = document.querySelectorAll(".toggle-row .toggle");
 
-    showToast("Setup completed!", true);
-
-    setDoc(
+    await setDoc(
       doc(db, "users", user.uid),
       {
         usage: usageEl?.innerText.trim().toLowerCase() || "",
@@ -204,18 +180,13 @@ window.addEventListener("DOMContentLoaded", () => {
           email: toggles[0]?.classList.contains("active") || false,
           push: toggles[1]?.classList.contains("active") || false,
         },
-        photoURL: "",
         setupCompleted: true,
         updatedAt: new Date().toISOString(),
       },
       { merge: true }
-    )
-      .then(() => {
-        window.location.replace("../pages/Home.html");
-      })
-      .catch((err) => {
-        console.error(err);
-        showToast("Failed to save setup", false);
-      });
+    );
+
+    showToast("Setup completed");
+    window.location.replace("../pages/Home.html");
   };
 });
