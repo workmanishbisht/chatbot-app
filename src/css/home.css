@@ -54,6 +54,13 @@ body {
 
 .top-links .highlight {
   color: var(--error-bg);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.top-links i {
+  font-size: 18px;
+  font-weight: 500;
 }
 
 /* ===== DASHBOARD ===== */
@@ -67,12 +74,15 @@ body {
   font-size: 2.4rem;
   font-weight: 800;
   line-height: 1.1;
+  text-align: center;
 }
 
 .welcome-box p {
   margin-top: 8px;
   font-size: 0.95rem;
+  font-weight: 400;
   color: var(--text-secondary);
+  text-align: center;
 }
 
 /* ===== CARDS ===== */
@@ -94,7 +104,6 @@ body {
 
 .card:hover {
   border-color: var(--accent-primary);
-  transform: translateY(-4px);
 }
 
 .card i {
@@ -181,6 +190,7 @@ body {
 /* ===== SEND BUTTON ===== */
 .send-btn {
   background: var(--accent-primary);
+  color: #fff;
   border: none;
   width: 38px;
   height: 38px;
@@ -200,10 +210,10 @@ body {
 /* ===== PLUS MENU ===== */
 .plus-menu {
   position: absolute;
-  bottom: 90px;
+  bottom: 120px;
   left: 4%;
   right: 4%;
-  width: 92%;
+  width: 80%;
   background: #0b1a1f;
   border: 1px solid var(--border-social);
   border-radius: 14px;
@@ -234,14 +244,14 @@ body {
 }
 
 .menu-item i {
-  font-size: 1.35rem;
+  font-size: 1.2rem;
   color: var(--text-secondary);
   min-width: 24px;
 }
 
 .menu-item span {
   color: #ffffff;
-  font-size: 0.98rem;
+  font-size: 0.94rem;
   font-weight: 400;
 }
 
