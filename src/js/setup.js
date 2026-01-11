@@ -39,22 +39,6 @@ function showToast(text, ok = true) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // ===== PLUS MENU =====
-  const plusBtn = document.getElementById("plusBtn");
-  const plusMenu = document.getElementById("plusMenu");
-
-  plusBtn?.addEventListener("click", (e) => {
-    e.stopPropagation();
-    plusBtn.classList.toggle("active");
-    plusMenu.classList.toggle("show");
-  });
-
-  document.addEventListener("click", () => {
-    plusBtn?.classList.remove("active");
-    plusMenu?.classList.remove("show");
-  });
-
-  // ===== ELEMENTS =====
   const profileImg = document.getElementById("profilePreview");
   const removeBtn = document.querySelector(".remove-btn");
   const changeText = document.querySelector(".profile .change-text");
@@ -206,17 +190,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ===== FINISH SETUP =====
-  finishBtn.onclick = () => {
+  finishBtn.onclick = async () => {
     const user = auth.currentUser;
     if (!user || finishBtn.disabled) return;
 
-    // redirect within 500ms
-    setTimeout(() => {
-      location.replace("../pages/Home.html");
-    }, 500);
-
-    // firestore update in background
-    setDoc(
+    await setDoc(
       doc(db, "users", user.uid),
       {
         setupCompleted: true,
@@ -226,5 +204,6 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     localStorage.removeItem(`setup_${user.uid}`);
+    location.replace("../pages/Home.html");
   };
 });
