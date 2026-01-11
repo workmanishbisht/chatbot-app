@@ -204,6 +204,9 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     localStorage.removeItem(`setup_${user.uid}`);
-    location.replace("../pages/Home.html");
+
+    setTimeout(() => {
+      location.replace("../pages/Home.html");
+    }, 500);
   };
 });
