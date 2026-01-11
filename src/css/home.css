@@ -18,11 +18,7 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  background: radial-gradient(
-    circle at top,
-    var(--bg-primary),
-    var(--bg-secondary)
-  );
+  background: radial-gradient(circle at top, var(--bg-primary), var(--bg-secondary));
   min-height: 100vh;
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
@@ -204,24 +200,64 @@ body {
 /* ===== PLUS MENU ===== */
 .plus-menu {
   position: absolute;
-  bottom: 80px;
-  left: 14px;
-  width: 280px;
+  bottom: 90px;
+  left: 4%;
+  right: 4%;
+  width: 92%;
   background: #0b1a1f;
   border: 1px solid var(--border-social);
   border-radius: 14px;
-  padding: 8px;
+  padding: 12px 8px;
   opacity: 0;
   transform: translateY(12px) scale(0.96);
   pointer-events: none;
   transition: all 0.35s ease;
   z-index: 100;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
 .plus-menu.show {
   opacity: 1;
   transform: translateY(0) scale(1);
   pointer-events: auto;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+.menu-item i {
+  font-size: 1.35rem;
+  color: var(--text-secondary);
+  min-width: 24px;
+}
+
+.menu-item span {
+  color: #ffffff;
+  font-size: 0.98rem;
+  font-weight: 400;
+}
+
+.menu-item:hover {
+  background: #162a33;
+}
+
+.menu-item:hover i,
+.menu-item:hover span {
+  color: var(--accent-primary);
+}
+
+.menu-divider {
+  height: 1px;
+  background: var(--border-social);
+  margin: 8px 12px;
 }
 
 /* ===== NOTE ===== */
@@ -232,66 +268,30 @@ body {
   color: var(--text-secondary);
 }
 
-/* RESPONSIVE DESIGN               */
+/* ============================================= */
+/*               RESPONSIVE DESIGN               */
+/* ============================================= */
 
 @media (max-width: 1200px) {
-  .dashboard {
-    padding: 20px 18px;
-  }
-
-  .card-grid {
-    gap: 1.25rem;
-  }
+  .dashboard { padding: 20px 18px; }
+  .card-grid { gap: 1.25rem; }
 }
 
 @media (max-width: 992px) {
-  .top-bar {
-    padding: 16px 18px;
-  }
-
-  .welcome-box h1 {
-    font-size: 2.1rem;
-  }
-
-  .card {
-    padding: 1.4rem;
-  }
+  .top-bar { padding: 16px 18px; }
+  .welcome-box h1 { font-size: 2.1rem; }
+  .card { padding: 1.4rem; }
 }
 
 @media (max-width: 768px) {
-  .top-bar {
-    padding: 14px 16px;
-  }
-
-  .logo {
-    font-size: 18px;
-  }
-
-  .top-links a {
-    font-size: 14px;
-  }
-
-  .welcome-box h1 {
-    font-size: 1.9rem;
-  }
-
-  .welcome-box p {
-    font-size: 0.9rem;
-  }
-
-  .card-grid {
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1.2rem;
-  }
-
-  .prompt-wrapper {
-    margin-top: 3rem;
-  }
-
-  .prompt-box {
-    padding: 9px 12px;
-    border-radius: 999px;
-  }
+  .top-bar { padding: 14px 16px; }
+  .logo { font-size: 18px; }
+  .top-links a { font-size: 14px; }
+  .welcome-box h1 { font-size: 1.9rem; }
+  .welcome-box p { font-size: 0.9rem; }
+  .card-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; }
+  .prompt-wrapper { margin-top: 3rem; }
+  .prompt-box { padding: 9px 12px; border-radius: 999px; }
 }
 
 @media (max-width: 576px) {
@@ -300,48 +300,25 @@ body {
     flex-wrap: wrap;
     gap: 12px;
   }
-
-  .top-links {
-    margin-left: auto;
-  }
-
-  .dashboard {
-    padding: 16px 14px;
-  }
-
-  .welcome-box h1 {
-    font-size: 1.75rem;
-  }
-
-  .card-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .card {
-    padding: 1.5rem;
-  }
-
-  .prompt-input {
-    font-size: 0.95rem;
-  }
-
-  .send-btn {
-    width: 36px;
-    height: 36px;
-  }
-
-  .send-btn i {
-    font-size: 17px;
-  }
-
+  
+  .top-links { margin-left: auto; }
+  .dashboard { padding: 16px 14px; }
+  .welcome-box h1 { font-size: 1.75rem; }
+  .card-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .card { padding: 1.5rem; }
+  .prompt-input { font-size: 0.95rem; }
+  .send-btn { width: 36px; height: 36px; }
+  .send-btn i { font-size: 17px; }
+  
   .plus-menu {
-    width: 92%;
-    left: 4%;
-    right: 4%;
-    bottom: 90px;
+    bottom: 100px;
+    padding: 14px 8px;
   }
-
+  
+  .menu-item {
+    padding: 16px 18px;
+  }
+  
   .prompt-note {
     font-size: 0.7rem;
     padding: 0 10px;
@@ -349,37 +326,25 @@ body {
 }
 
 @media (max-width: 380px) {
-  .top-bar {
-    padding: 12px 12px;
+  .top-bar { padding: 12px 12px; }
+  .logo { font-size: 16px; }
+  .welcome-box h1 { font-size: 1.55rem; }
+  .prompt-box { padding: 8px 10px; gap: 8px; }
+  .prompt-input { font-size: 0.92rem; }
+  .icon-btn i { font-size: 1.25rem; }
+  .send-btn { width: 34px; height: 34px; }
+  .send-btn i { font-size: 16px; }
+  
+  .plus-menu {
+    bottom: 95px;
+    padding: 12px 6px;
   }
-
-  .logo {
-    font-size: 18px;
+  
+  .menu-item {
+    padding: 14px 16px;
+    gap: 12px;
   }
-
-  .welcome-box h1 {
-    font-size: 1.55rem;
-  }
-
-  .prompt-box {
-    padding: 8px 10px;
-    gap: 8px;
-  }
-
-  .prompt-input {
-    font-size: 0.92rem;
-  }
-
-  .icon-btn i {
-    font-size: 1.25rem;
-  }
-
-  .send-btn {
-    width: 34px;
-    height: 34px;
-  }
-
-  .send-btn i {
-    font-size: 16px;
-  }
+  
+  .menu-item i { font-size: 1.3rem; }
+  .menu-item span { font-size: 0.95rem; }
 }
