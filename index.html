@@ -1,179 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Nova | Auth</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/src/Assets/FavIcon/favicon.png" />
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- remixicon cdn -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <!-- toastify cdn -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <!-- main file -->
+    <link rel="stylesheet" href="./src/css/style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <title>Nova | Auth</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="/src/Assets/FavIcon/favicon.png">
-  <!-- Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Poppins:wght@400;500;600&display=swap"
-    rel="stylesheet" />
-  <!-- remixicon cdn -->
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
-  <!-- toastify cdn -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-  <!-- main file -->
-  <link rel="stylesheet" href="./src/css/style.css" />
-</head>
+  <body>
+    <main>
+      <!-- HEADER -->
+      <header class="top-bar">
+        <div class="logo">
+          <i class="ri-drop-fill"></i>
+          <span>Nova</span>
+        </div>
+        <div class="top-links">
+          <a href="#">Help</a>
+          <a href="#" class="highlight" id="toggleAuth">Sign Up</a>
+        </div>
+      </header>
 
-<body>
+      <!-- CONTAINER -->
+      <div class="container">
+        <div class="login-card">
+          <!-- LOGIN FORM -->
+          <div class="form login-form active">
+            <h2>Sign In</h2>
+            <p class="sub-text">
+              Enter your credentials to access your account.
+            </p>
 
-  <!-- HEADER -->
-  <header class="top-bar">
-    <div class="logo">
-      <i class="ri-drop-fill"></i>
-      <span>Nova</span>
-    </div>
-    <div class="top-links">
-      <a href="#">Help</a>
-      <a href="#" class="highlight" id="toggleAuth">Sign Up</a>
-    </div>
-  </header>
+            <div class="input-group">
+              <label>Email Address</label>
+              <div class="input-box">
+                <i class="ri-mail-line"></i>
+                <input
+                  id="loginEmail"
+                  type="email"
+                  placeholder="name@example.com"
+                  required
+                />
+              </div>
+            </div>
 
-  <!-- CONTAINER -->
-  <div class="container">
+            <div class="input-group">
+              <label>Password</label>
+              <div class="input-box">
+                <i class="ri-lock-line"></i>
+                <input
+                  id="loginPassword"
+                  type="password"
+                  placeholder="••••••••"
+                  required
+                />
+                <i class="ri-eye-off-line eye"></i>
+              </div>
+              <a href="#" class="forgot">Forgot password?</a>
+            </div>
 
-    <div class="login-card">
+            <button class="login-btn">Log In</button>
 
-      <!-- LOGIN FORM -->
-      <div class="form login-form active">
-        <h2>Sign In</h2>
-        <p class="sub-text">Enter your credentials to access your account.</p>
+            <div class="divider">OR CONTINUE WITH</div>
 
-        <div class="input-group">
-          <label>Email Address</label>
-          <div class="input-box">
-            <i class="ri-mail-line"></i>
-            <input id="loginEmail" type="email" placeholder="name@example.com" required />
+            <!-- SOCIAL LOGIN -->
+            <div class="social-buttons">
+              <button class="social google">
+                <svg viewBox="0 0 48 48">
+                  <path
+                    fill="#EA4335"
+                    d="M24 9.5c3.54 0 6.72 1.22 9.22 3.6l6.9-6.9C35.9 2.34 30.3 0 24 0 14.64 0 6.57 5.38 2.74 13.22l8.1 6.3C12.6 13.53 17.9 9.5 24 9.5z"
+                  />
+                  <path
+                    fill="#4285F4"
+                    d="M46.1 24.5c0-1.54-.14-3.02-.4-4.46H24v8.45h12.4c-.54 2.9-2.16 5.36-4.6 7.02l7.04 5.47C43.1 36.9 46.1 31.2 46.1 24.5z"
+                  />
+                  <path
+                    fill="#FBBC05"
+                    d="M10.84 28.52c-.48-1.44-.76-2.98-.76-4.52s.28-3.08.76-4.52l-8.1-6.3C.99 16.86 0 20.33 0 24s.99 7.14 2.74 10.82l8.1-6.3z"
+                  />
+                  <path
+                    fill="#34A853"
+                    d="M24 48c6.3 0 11.6-2.08 15.46-5.66l-7.04-5.47c-1.96 1.32-4.46 2.1-8.42 2.1-6.1 0-11.4-4.03-13.16-9.52l-8.1 6.3C6.57 42.62 14.64 48 24 48z"
+                  />
+                </svg>
+                Google
+              </button>
+
+              <button class="social github">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.11 3.29 9.44 7.86 10.97.58.1.79-.25.79-.56v-2.02c-3.2.7-3.87-1.38-3.87-1.38-.52-1.32-1.28-1.67-1.28-1.67-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.77.11 3.06.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.41-5.26 5.69.41.36.78 1.08.78 2.18v3.23c0 .31.21.67.8.56A11.53 11.53 0 0 0 23.5 12C23.5 5.74 18.27.5 12 .5z"
+                  />
+                </svg>
+                GitHub
+              </button>
+            </div>
+
+            <p class="signup-text">
+              Don't have an account?
+              <a href="#" class="switch-to-signup">Sign up</a>
+            </p>
+          </div>
+
+          <!-- SIGNUP FORM -->
+          <div class="form signup-form">
+            <h2>Create Account</h2>
+            <p class="sub-text">Create a new account to get started.</p>
+
+            <div class="input-group">
+              <label>Full Name</label>
+              <div class="input-box">
+                <i class="ri-user-line"></i>
+                <input type="text" placeholder="John Doe" required />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Email Address</label>
+              <div class="input-box">
+                <i class="ri-mail-line"></i>
+                <input type="email" placeholder="name@example.com" required />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Password</label>
+              <div class="input-box">
+                <i class="ri-lock-line"></i>
+                <input type="password" placeholder="••••••••" required />
+                <i class="ri-eye-off-line eye"></i>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Confirm Password</label>
+              <div class="input-box">
+                <i class="ri-lock-line"></i>
+                <input type="password" placeholder="••••••••" required />
+                <i class="ri-eye-off-line eye"></i>
+              </div>
+            </div>
+
+            <button class="login-btn">Sign Up</button>
+
+            <div class="divider">OR CONTINUE WITH</div>
+
+            <!-- SOCIAL SIGNUP -->
+            <div class="social-buttons">
+              <button class="social google">
+                <svg viewBox="0 0 48 48">
+                  <path
+                    fill="#EA4335"
+                    d="M24 9.5c3.54 0 6.72 1.22 9.22 3.6l6.9-6.9C35.9 2.34 30.3 0 24 0 14.64 0 6.57 5.38 2.74 13.22l8.1 6.3C12.6 13.53 17.9 9.5 24 9.5z"
+                  />
+                  <path
+                    fill="#4285F4"
+                    d="M46.1 24.5c0-1.54-.14-3.02-.4-4.46H24v8.45h12.4c-.54 2.9-2.16 5.36-4.6 7.02l7.04 5.47C43.1 36.9 46.1 31.2 46.1 24.5z"
+                  />
+                  <path
+                    fill="#FBBC05"
+                    d="M10.84 28.52c-.48-1.44-.76-2.98-.76-4.52s.28-3.08.76-4.52l-8.1-6.3C.99 16.86 0 20.33 0 24s.99 7.14 2.74 10.82l8.1-6.3z"
+                  />
+                  <path
+                    fill="#34A853"
+                    d="M24 48c6.3 0 11.6-2.08 15.46-5.66l-7.04-5.47c-1.96 1.32-4.46 2.1-8.42 2.1-6.1 0-11.4-4.03-13.16-9.52l-8.1 6.3C6.57 42.62 14.64 48 24 48z"
+                  />
+                </svg>
+                Google
+              </button>
+
+              <button class="social github">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.11 3.29 9.44 7.86 10.97.58.1.79-.25.79-.56v-2.02c-3.2.7-3.87-1.38-3.87-1.38-.52-1.32-1.28-1.67-1.28-1.67-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.77.11 3.06.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.41-5.26 5.69.41.36.78 1.08.78 2.18v3.23c0 .31.21.67.8.56A11.53 11.53 0 0 0 23.5 12C23.5 5.74 18.27.5 12 .5z"
+                  />
+                </svg>
+                GitHub
+              </button>
+            </div>
+
+            <p class="signup-text">
+              Already have an account?
+              <a href="#" class="switch-to-login">Sign In</a>
+            </p>
           </div>
         </div>
-
-        <div class="input-group">
-          <label>Password</label>
-          <div class="input-box">
-            <i class="ri-lock-line"></i>
-            <input id="loginPassword" type="password" placeholder="••••••••" required />
-            <i class="ri-eye-off-line eye"></i>
-          </div>
-          <a href="#" class="forgot">Forgot password?</a>
-        </div>
-
-        <button class="login-btn">Log In</button>
-
-        <div class="divider">OR CONTINUE WITH</div>
-
-        <!-- SOCIAL LOGIN -->
-        <div class="social-buttons">
-          <button class="social google">
-            <svg viewBox="0 0 48 48">
-              <path fill="#EA4335"
-                d="M24 9.5c3.54 0 6.72 1.22 9.22 3.6l6.9-6.9C35.9 2.34 30.3 0 24 0 14.64 0 6.57 5.38 2.74 13.22l8.1 6.3C12.6 13.53 17.9 9.5 24 9.5z" />
-              <path fill="#4285F4"
-                d="M46.1 24.5c0-1.54-.14-3.02-.4-4.46H24v8.45h12.4c-.54 2.9-2.16 5.36-4.6 7.02l7.04 5.47C43.1 36.9 46.1 31.2 46.1 24.5z" />
-              <path fill="#FBBC05"
-                d="M10.84 28.52c-.48-1.44-.76-2.98-.76-4.52s.28-3.08.76-4.52l-8.1-6.3C.99 16.86 0 20.33 0 24s.99 7.14 2.74 10.82l8.1-6.3z" />
-              <path fill="#34A853"
-                d="M24 48c6.3 0 11.6-2.08 15.46-5.66l-7.04-5.47c-1.96 1.32-4.46 2.1-8.42 2.1-6.1 0-11.4-4.03-13.16-9.52l-8.1 6.3C6.57 42.62 14.64 48 24 48z" />
-            </svg>
-            Google
-          </button>
-
-          <button class="social github">
-            <svg viewBox="0 0 24 24">
-              <path fill="currentColor"
-                d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.11 3.29 9.44 7.86 10.97.58.1.79-.25.79-.56v-2.02c-3.2.7-3.87-1.38-3.87-1.38-.52-1.32-1.28-1.67-1.28-1.67-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.77.11 3.06.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.41-5.26 5.69.41.36.78 1.08.78 2.18v3.23c0 .31.21.67.8.56A11.53 11.53 0 0 0 23.5 12C23.5 5.74 18.27.5 12 .5z" />
-            </svg>
-            GitHub
-          </button>
-        </div>
-
-        <p class="signup-text">
-          Don't have an account?
-          <a href="#" class="switch-to-signup">Sign up</a>
-        </p>
       </div>
+    </main>
 
-      <!-- SIGNUP FORM -->
-      <div class="form signup-form">
-        <h2>Create Account</h2>
-        <p class="sub-text">Create a new account to get started.</p>
-
-        <div class="input-group">
-          <label>Full Name</label>
-          <div class="input-box">
-            <i class="ri-user-line"></i>
-            <input type="text" placeholder="John Doe" required />
-          </div>
-        </div>
-
-        <div class="input-group">
-          <label>Email Address</label>
-          <div class="input-box">
-            <i class="ri-mail-line"></i>
-            <input type="email" placeholder="name@example.com" required />
-          </div>
-        </div>
-
-        <div class="input-group">
-          <label>Password</label>
-          <div class="input-box">
-            <i class="ri-lock-line"></i>
-            <input type="password" placeholder="••••••••" required />
-            <i class="ri-eye-off-line eye"></i>
-          </div>
-        </div>
-
-        <div class="input-group">
-          <label>Confirm Password</label>
-          <div class="input-box">
-            <i class="ri-lock-line"></i>
-            <input type="password" placeholder="••••••••" required />
-            <i class="ri-eye-off-line eye"></i>
-          </div>
-        </div>
-
-        <button class="login-btn">Sign Up</button>
-
-        <div class="divider">OR CONTINUE WITH</div>
-
-        <!-- SOCIAL SIGNUP -->
-        <div class="social-buttons">
-          <button class="social google">
-            <svg viewBox="0 0 48 48">
-              <path fill="#EA4335"
-                d="M24 9.5c3.54 0 6.72 1.22 9.22 3.6l6.9-6.9C35.9 2.34 30.3 0 24 0 14.64 0 6.57 5.38 2.74 13.22l8.1 6.3C12.6 13.53 17.9 9.5 24 9.5z" />
-              <path fill="#4285F4"
-                d="M46.1 24.5c0-1.54-.14-3.02-.4-4.46H24v8.45h12.4c-.54 2.9-2.16 5.36-4.6 7.02l7.04 5.47C43.1 36.9 46.1 31.2 46.1 24.5z" />
-              <path fill="#FBBC05"
-                d="M10.84 28.52c-.48-1.44-.76-2.98-.76-4.52s.28-3.08.76-4.52l-8.1-6.3C.99 16.86 0 20.33 0 24s.99 7.14 2.74 10.82l8.1-6.3z" />
-              <path fill="#34A853"
-                d="M24 48c6.3 0 11.6-2.08 15.46-5.66l-7.04-5.47c-1.96 1.32-4.46 2.1-8.42 2.1-6.1 0-11.4-4.03-13.16-9.52l-8.1 6.3C6.57 42.62 14.64 48 24 48z" />
-            </svg>
-            Google
-          </button>
-
-          <button class="social github">
-            <svg viewBox="0 0 24 24">
-              <path fill="currentColor"
-                d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.11 3.29 9.44 7.86 10.97.58.1.79-.25.79-.56v-2.02c-3.2.7-3.87-1.38-3.87-1.38-.52-1.32-1.28-1.67-1.28-1.67-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.77.11 3.06.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.41-5.26 5.69.41.36.78 1.08.78 2.18v3.23c0 .31.21.67.8.56A11.53 11.53 0 0 0 23.5 12C23.5 5.74 18.27.5 12 .5z" />
-            </svg>
-            GitHub
-          </button>
-        </div>
-
-        <p class="signup-text">
-          Already have an account?
-          <a href="#" class="switch-to-login">Sign In</a>
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <!-- script file -->
-  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-  <script type="module" src="./src/js/script.js"></script>
-</body>
-
+    <!-- script file -->
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="module" src="./src/js/script.js"></script>
+  </body>
 </html>

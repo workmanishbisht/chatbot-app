@@ -34,7 +34,11 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  background: radial-gradient(circle at top, var(--bg-primary), var(--bg-secondary));
+  background: radial-gradient(
+    circle at top,
+    var(--bg-primary),
+    var(--bg-secondary)
+  );
   min-height: 100vh;
   color: var(--text-primary);
 }
@@ -63,12 +67,19 @@ body {
   color: var(--text-secondary);
   text-decoration: none;
   font-size: 14px;
+  font-weight: 500;
+  font-family: "Poppins";
 }
 
 .top-links .highlight {
   color: var(--accent-primary);
   font-weight: 500;
   font-family: "Poppins";
+}
+
+.top-links i{
+  font-size: 20px;
+  margin: 0px 6px;
 }
 
 .container {
@@ -304,10 +315,6 @@ input:-webkit-autofill:active {
   display: block;
   flex-shrink: 0;
 }
-
-
-
-
 
 @media screen and (min-width: 1440px) {
   .login-card {
@@ -561,7 +568,7 @@ input:-webkit-autofill:active {
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 2),
-screen and (min-resolution: 192dpi) {
+  screen and (min-resolution: 192dpi) {
   .login-card {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
   }
