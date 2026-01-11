@@ -278,6 +278,62 @@ body {
   color: var(--text-secondary);
 }
 
+.chat-container {
+  max-width: 780px;
+  margin: 0 auto 2rem auto;
+  padding: 0 16px;
+  display: none;
+  flex-direction: column;
+  gap: 1.6rem;
+  overflow-y: auto;
+  max-height: 60vh;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  max-width: 85%;
+  margin-bottom: 0.4rem;
+}
+
+.message.user {
+  align-self: flex-end;
+}
+
+.message.ai {
+  align-self: flex-start;
+}
+
+.message-bubble {
+  padding: 14px 18px;
+  border-radius: 18px;
+  line-height: 1.45;
+  font-size: 0.98rem;
+}
+
+.message.user .message-bubble {
+  background: var(--accent-primary);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.message.ai .message-bubble {
+  background: #162a33;
+  border: 1px solid #1f3a45;
+  border-bottom-left-radius: 4px;
+}
+
+.message-time {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  margin-top: 6px;
+  opacity: 0.8;
+}
+
+.hidden {
+  display: none !important;
+}
+
 /* ============================================= */
 /*               RESPONSIVE DESIGN               */
 /* ============================================= */

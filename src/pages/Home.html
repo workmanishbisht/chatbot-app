@@ -5,17 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nova | Home</title>
     <link rel="icon" type="image/png" href="/src/Assets/FavIcon/favicon.png" />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Poppins:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
       rel="stylesheet"
     />
-
     <link rel="stylesheet" href="../css/home.css" />
   </head>
   <body>
@@ -33,91 +30,80 @@
       </header>
 
       <section class="dashboard">
-        <div class="welcome-box">
-          <h1>Welcome back</h1>
-          <p>Your AI assistant is ready to help you.</p>
+        <div class="welcome-initial" id="welcomeInitial">
+          <div class="welcome-box">
+            <h1>Welcome back</h1>
+            <p>Your AI assistant is ready to help you.</p>
+          </div>
+          <div class="card-grid">
+            <div class="card">
+              <i class="ri-code-s-slash-line"></i>
+              <h3>Code Help</h3>
+              <p>Generate, debug and optimize your code.</p>
+            </div>
+            <div class="card">
+              <i class="ri-chat-3-line"></i>
+              <h3>Ask Questions</h3>
+              <p>Get instant answers with explanations.</p>
+            </div>
+            <div class="card">
+              <i class="ri-lightbulb-flash-line"></i>
+              <h3>Brainstorm</h3>
+              <p>Ideas, UI flows and creative thinking.</p>
+            </div>
+          </div>
         </div>
 
-        <div class="card-grid">
-          <div class="card">
-            <i class="ri-code-s-slash-line"></i>
-            <h3>Code Help</h3>
-            <p>Generate, debug and optimize your code.</p>
-          </div>
+        <div class="chat-container" id="chatContainer"></div>
 
-          <div class="card">
-            <i class="ri-chat-3-line"></i>
-            <h3>Ask Questions</h3>
-            <p>Get instant answers with explanations.</p>
-          </div>
-
-          <div class="card">
-            <i class="ri-lightbulb-flash-line"></i>
-            <h3>Brainstorm</h3>
-            <p>Ideas, UI flows and creative thinking.</p>
-          </div>
-        </div>
-
-        <!-- PROMPT -->
         <div class="prompt-wrapper">
           <div class="prompt-box">
             <button class="icon-btn plus-btn" id="plusBtn">
               <i class="ri-add-line"></i>
             </button>
-
             <input
               type="text"
-              placeholder="Ask anything"
+              placeholder="Ask anything..."
               class="prompt-input"
+              id="promptInput"
             />
-
             <button class="icon-btn">
               <i class="ri-mic-line"></i>
             </button>
-
-            <button class="send-btn">
-              <i class="ri-voiceprint-line"></i>
+            <button class="send-btn" id="sendBtn">
+              <i class="ri-send-plane-2-line"></i>
             </button>
           </div>
 
-          <!-- PLUS MENU -->
           <div class="plus-menu" id="plusMenu">
             <div class="menu-item">
-              <i class="ri-image-line"></i>
-              <span>Add photos & files</span>
+              <i class="ri-image-line"></i><span>Add photos & files</span>
             </div>
             <div class="menu-item">
-              <i class="ri-camera-line"></i>
-              <span>Take photo</span>
+              <i class="ri-camera-line"></i><span>Take photo</span>
             </div>
             <div class="menu-divider"></div>
             <div class="menu-item">
-              <i class="ri-magic-line"></i>
-              <span>Create image</span>
+              <i class="ri-magic-line"></i><span>Create image</span>
             </div>
             <div class="menu-item">
-              <i class="ri-search-line"></i>
-              <span>Deep research</span>
+              <i class="ri-search-line"></i><span>Deep research</span>
             </div>
             <div class="menu-item">
-              <i class="ri-shopping-bag-line"></i>
-              <span>Shopping research</span>
+              <i class="ri-shopping-bag-line"></i><span>Shopping research</span>
             </div>
             <div class="menu-item">
-              <i class="ri-brain-line"></i>
-              <span>Thinking</span>
+              <i class="ri-brain-line"></i><span>Thinking</span>
             </div>
           </div>
 
           <p class="prompt-note">
-            Nova can make mistakes. Check important info. See Cookie
-            Preferences.
+            Nova can make mistakes. Check important info.
           </p>
         </div>
       </section>
     </main>
 
-    <!-- script link -->
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script type="module" src="../js/home.js"></script>
   </body>
