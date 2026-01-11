@@ -6,9 +6,9 @@ import {
   GoogleAuthProvider,
   GithubAuthProvider,
   signInWithPopup,
+  onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-/* Firebase init */
 const firebaseConfig = {
   apiKey: "AIzaSyCEYuOyb0Tp28AZ3-l0diqvNPG810Bo8-Y",
   authDomain: "studio-3859565550-24cfb.firebaseapp.com",
@@ -22,7 +22,6 @@ const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
 
-/* DOM */
 const loginForm = document.querySelector(".login-form");
 const signupForm = document.querySelector(".signup-form");
 
@@ -34,9 +33,10 @@ const loginEmail = document.getElementById("loginEmail");
 const loginPassword = document.getElementById("loginPassword");
 const loginBtn = document.querySelector(".login-form .login-btn");
 
-const signupName = signupForm.querySelector('input[placeholder="John Doe"]');
-const signupEmail = signupForm.querySelector('input[type="email"]');
-const signupPasswords = signupForm.querySelectorAll('input[type="password"]');
+const signupName = signupForm?.querySelector('input[placeholder="John Doe"]');
+const signupEmail = signupForm?.querySelector('input[type="email"]');
+const signupPasswords =
+  signupForm?.querySelectorAll('input[type="password"]') || [];
 const signupBtn = document.querySelector(".signup-form .login-btn");
 
 const googleLoginBtn = document.querySelector(".login-form .social.google");
@@ -44,7 +44,6 @@ const googleSignupBtn = document.querySelector(".signup-form .social.google");
 const githubLoginBtn = document.querySelector(".login-form .social.github");
 const githubSignupBtn = document.querySelector(".signup-form .social.github");
 
-/* Toast */
 function showToast(text, success = true) {
   Toastify({
     text,
@@ -56,17 +55,15 @@ function showToast(text, success = true) {
   }).showToast();
 }
 
-/* Clear inputs */
 function clearForms() {
-  loginEmail.value = "";
-  loginPassword.value = "";
-  signupName.value = "";
-  signupEmail.value = "";
-  signupPasswords.forEach(i => i.value = "");
+  if (loginEmail) loginEmail.value = "";
+  if (loginPassword) loginPassword.value = "";
+  if (signupName) signupName.value = "";
+  if (signupEmail) signupEmail.value = "";
+  signupPasswords.forEach((i) => (i.value = ""));
 }
 
-/* Password eye toggle */
-document.querySelectorAll(".input-box").forEach(box => {
+document.querySelectorAll(".input-box").forEach((box) => {
   const input = box.querySelector("input");
   const eye = box.querySelector(".eye");
   if (!input || !eye) return;
@@ -78,55 +75,73 @@ document.querySelectorAll(".input-box").forEach(box => {
   });
 });
 
-/* Form toggle */
 function showLogin() {
-  signupForm.classList.remove("active");
-  loginForm.classList.add("active");
-  topToggleBtn.innerText = "Sign Up";
+  signupForm?.classList.remove("active");
+  loginForm?.classList.add("active");
+  if (topToggleBtn) topToggleBtn.innerText = "Sign Up";
   clearForms();
 }
 
 function showSignup() {
-  loginForm.classList.remove("active");
-  signupForm.classList.add("active");
-  topToggleBtn.innerText = "Log In";
+  loginForm?.classList.remove("active");
+  signupForm?.classList.add("active");
+  if (topToggleBtn) topToggleBtn.innerText = "Log In";
   clearForms();
 }
 
-switchToSignup?.addEventListener("click", e => {
+switchToSignup?.addEventListener("click", (e) => {
   e.preventDefault();
   showSignup();
 });
 
-switchToLogin?.addEventListener("click", e => {
+switchToLogin?.addEventListener("click", (e) => {
   e.preventDefault();
   showLogin();
 });
 
-topToggleBtn?.addEventListener("click", e => {
+topToggleBtn?.addEventListener("click", (e) => {
   e.preventDefault();
-  loginForm.classList.contains("active") ? showSignup() : showLogin();
+  loginForm?.classList.contains("active") ? showSignup() : showLogin();
 });
 
-/* Validation */
 function validate(email, password) {
-  if (!email || !password) return showToast("All fields are required", false), false;
-  if (!email.includes("@")) return showToast("Invalid email address", false), false;
-  if (password.length < 6) return showToast("Password must be at least 6 characters", false), false;
+  if (!email || !password) {
+    showToast("All fields are required", false);
+    return false;
+  }
+  if (!email.includes("@")) {
+    showToast("Invalid email address", false);
+    return false;
+  }
+  if (password.length < 6) {
+    showToast("Password must be at least 6 characters", false);
+    return false;
+  }
   return true;
 }
 
-/* LOGIN */
+onAuthStateChanged(auth, (user) => {
+  const isAuthPage =
+    location.pathname === "/" ||
+    location.pathname.endsWith("index.html") ||
+    location.pathname.endsWith("index.htm");
+
+  if (isAuthPage && user) {
+    setTimeout(() => {
+      location.replace("/src/pages/setup.html");
+    }, 300);
+  }
+});
+
 loginBtn?.addEventListener("click", async () => {
-  const email = loginEmail.value.trim();
-  const password = loginPassword.value.trim();
-  if (!validate(email, password)) return;
+  const email = loginEmail?.value.trim();
+  const password = loginPassword?.value.trim();
+  if (!email || !password || !validate(email, password)) return;
 
   try {
-    const res = await signInWithEmailAndPassword(auth, email, password);
-    localStorage.setItem("user", JSON.stringify(res.user));
+    await signInWithEmailAndPassword(auth, email, password);
     showToast("Login successful");
-    setTimeout(() => location.replace("/src/pages/setup.html"), 1400);
+    setTimeout(() => location.replace("/src/pages/setup.html"), 1200);
   } catch (err) {
     if (err.code === "auth/user-not-found") {
       showToast("Account not found. Please create an account.", false);
@@ -137,12 +152,11 @@ loginBtn?.addEventListener("click", async () => {
   }
 });
 
-/* SIGNUP */
 signupBtn?.addEventListener("click", async () => {
-  const name = signupName.value.trim();
-  const email = signupEmail.value.trim();
-  const password = signupPasswords[0].value.trim();
-  const confirm = signupPasswords[1].value.trim();
+  const name = signupName?.value.trim();
+  const email = signupEmail?.value.trim();
+  const password = signupPasswords[0]?.value.trim();
+  const confirm = signupPasswords[1]?.value.trim();
 
   if (!name) return showToast("Name is required", false);
   if (!validate(email, password)) return;
@@ -162,25 +176,20 @@ signupBtn?.addEventListener("click", async () => {
   }
 });
 
-/* Social auth */
-[googleLoginBtn, googleSignupBtn, githubLoginBtn, githubSignupBtn].forEach(btn => {
-  btn?.addEventListener("click", async () => {
-    try {
-      const provider = btn.classList.contains("google") ? googleProvider : githubProvider;
-      const res = await signInWithPopup(auth, provider);
-      localStorage.setItem("user", JSON.stringify(res.user));
-      showToast("Login successful");
-      setTimeout(() => location.replace("/src/pages/setup.html"), 1000);
-    } catch {
-      showToast("Authentication failed", false);
-    }
-  });
-});
+[googleLoginBtn, googleSignupBtn, githubLoginBtn, githubSignupBtn].forEach(
+  (btn) => {
+    btn?.addEventListener("click", async () => {
+      try {
+        const provider = btn.classList.contains("google")
+          ? googleProvider
+          : githubProvider;
 
-/* Auto redirect */
-if (
-  (location.pathname === "/" || location.pathname.endsWith("index.html")) &&
-  localStorage.getItem("user")
-) {
-  location.replace("/src/pages/setup.html");
-}
+        await signInWithPopup(auth, provider);
+        showToast("Login successful");
+        setTimeout(() => location.replace("/src/pages/setup.html"), 1000);
+      } catch {
+        showToast("Authentication failed", false);
+      }
+    });
+  }
+);

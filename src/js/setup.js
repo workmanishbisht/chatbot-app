@@ -1,4 +1,3 @@
-// ===== FIREBASE IMPORTS =====
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
   getAuth,
@@ -11,7 +10,6 @@ import {
   getDoc,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// ===== FIREBASE CONFIG =====
 const firebaseConfig = {
   apiKey: "AIzaSyCEYuOyb0Tp28AZ3-l0diqvNPG810Bo8-Y",
   authDomain: "studio-3859565550-24cfb.firebaseapp.com",
@@ -23,10 +21,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// ===== CONSTANTS =====
 const DEFAULT_AVATAR = "https://i.pravatar.cc/300";
 
-// ===== TOAST =====
 function showToast(text, ok = true) {
   if (!window.Toastify) return;
   Toastify({
@@ -47,14 +43,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let allowSave = true;
 
-  // ===== FILE INPUT =====
   const fileInput = document.createElement("input");
   fileInput.type = "file";
   fileInput.accept = "image/jpeg,image/png,image/webp";
   fileInput.hidden = true;
   document.body.appendChild(fileInput);
 
-  // ===== SAVE STATE =====
   function saveState(uid) {
     if (!allowSave) return;
     const state = {
@@ -71,7 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem(`setup_${uid}`, JSON.stringify(state));
   }
 
-  // ===== RESTORE STATE =====
   function restoreState(uid) {
     const raw = localStorage.getItem(`setup_${uid}`);
     if (!raw) return;
@@ -93,14 +86,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document
       .querySelectorAll(".toggle-row .toggle")
-      .forEach((el, i) => el.classList.toggle("active", state.toggles?.[i]));
+      .forEach((el, i) =>
+        el.classList.toggle("active", state.toggles?.[i] ?? false)
+      );
 
     profileImg.src = state.photo || DEFAULT_AVATAR;
     allowSave = true;
   }
 
-  // ===== PROGRESS =====
-  function updateProgress(uid) {
+  function updateProgress() {
+    const uid = auth.currentUser?.uid;
+    if (!uid) return;
+
     const done =
       (document.querySelector(".option-grid .option.active") ? 1 : 0) +
       (document.querySelector(".role-grid .role.active") ? 1 : 0) +
@@ -108,105 +105,96 @@ document.addEventListener("DOMContentLoaded", () => {
       (profileImg.src !== DEFAULT_AVATAR ? 1 : 0);
 
     const percent = (done / 5) * 100;
-    bar.style.width = percent + "%";
+    bar.style.width = `${percent}%`;
     finishBtn.disabled = percent !== 100;
     finishBtn.style.opacity = percent === 100 ? "1" : "0.5";
 
-    if (uid) saveState(uid);
+    saveState(uid);
   }
 
-  // ===== IMAGE UPLOAD =====
   changeText.onclick = () => fileInput.click();
 
   fileInput.onchange = () => {
-    const file = fileInput.files[0];
-    const user = auth.currentUser;
-    if (!file || !user) return;
+    const file = fileInput.files?.[0];
+    if (!file) return;
 
     const reader = new FileReader();
     reader.onload = () => {
       profileImg.src = reader.result;
-      updateProgress(user.uid);
+      updateProgress();
       showToast("Profile picture updated");
     };
     reader.readAsDataURL(file);
   };
 
-  // ===== IMAGE REMOVE =====
   removeBtn.onclick = () => {
-    const user = auth.currentUser;
-    if (!user) return;
     profileImg.src = DEFAULT_AVATAR;
-    updateProgress(user.uid);
+    updateProgress();
     showToast("Profile picture removed", false);
   };
 
-  // ===== OPTION SELECT =====
   document.querySelectorAll(".option-grid .option").forEach((el) => {
     el.addEventListener("click", () => {
       document
         .querySelectorAll(".option-grid .option")
         .forEach((o) => o.classList.remove("active"));
       el.classList.add("active");
-      updateProgress(auth.currentUser?.uid);
+      updateProgress();
     });
   });
 
-  // ===== ROLE SELECT =====
   document.querySelectorAll(".role-grid .role").forEach((el) => {
     el.addEventListener("click", () => {
       document
         .querySelectorAll(".role-grid .role")
         .forEach((r) => r.classList.remove("active"));
       el.classList.add("active");
-      updateProgress(auth.currentUser?.uid);
+      updateProgress();
     });
   });
 
-  // ===== TOGGLE =====
   document.querySelectorAll(".toggle-row .toggle").forEach((el) => {
     el.addEventListener("click", () => {
       el.classList.toggle("active");
-      updateProgress(auth.currentUser?.uid);
+      updateProgress();
     });
   });
 
-  // ===== AUTH GUARD =====
   onAuthStateChanged(auth, async (user) => {
     if (!user) {
       location.replace("../index.html");
       return;
     }
 
+    await restoreState(user.uid);
+    updateProgress();
+
     const snap = await getDoc(doc(db, "users", user.uid));
 
     if (snap.exists() && snap.data().setupCompleted === true) {
-      location.replace("../pages/Home.html");
-      return;
+      location.replace("./Home.html");
     }
-
-    restoreState(user.uid);
-    updateProgress(user.uid);
   });
 
-  // ===== FINISH SETUP =====
   finishBtn.onclick = async () => {
     const user = auth.currentUser;
     if (!user || finishBtn.disabled) return;
 
-    await setDoc(
-      doc(db, "users", user.uid),
-      {
-        setupCompleted: true,
-        updatedAt: new Date().toISOString(),
-      },
-      { merge: true }
-    );
+    location.replace("./Home.html");
 
-    localStorage.removeItem(`setup_${user.uid}`);
+    try {
+      await setDoc(
+        doc(db, "users", user.uid),
+        {
+          setupCompleted: true,
+          updatedAt: new Date().toISOString(),
+        },
+        { merge: true }
+      );
 
-    setTimeout(() => {
-      location.replace("../pages/Home.html");
-    }, 500);
+      localStorage.removeItem(`setup_${user.uid}`);
+    } catch (error) {
+      console.error("Setup completion failed:", error);
+    }
   };
 });
