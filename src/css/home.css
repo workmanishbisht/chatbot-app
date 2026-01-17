@@ -42,6 +42,10 @@ body {
   font-weight: 600;
 }
 
+.logo i {
+  color: var(--accent-primary);
+}
+
 .top-links a {
   color: var(--text-secondary);
   text-decoration: none;
